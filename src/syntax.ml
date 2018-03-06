@@ -32,7 +32,7 @@
   ----------------------------------------------------------------------------*)
 
 open Migrate_parsetree
-open Ast_405
+open Ast_406
 
 open Parsetree
 open Ast_helper
@@ -172,7 +172,9 @@ let sinclude_ nm with_ = Sig.include_ { pincl_mod =
                                       }
 
 (* with nm0 := nm1 (in .mli; for use in include) *)
-let withty nm0 nm1 = Pwith_typesubst (Type.mk ~manifest:(ty0 nm1) (strloc nm1))
+let withty nm0 nm1 =
+  let tdef = ty0 nm1 in
+  Pwith_typesubst (strloc (Longident.parse nm1), Type.mk ~manifest:tdef (strloc nm1))
 
 (* if cond then thn else els *)
 let ifthen cond thn els = Exp.ifthenelse cond thn (Some els)

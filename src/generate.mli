@@ -32,7 +32,7 @@
   ----------------------------------------------------------------------------*)
 
 open Migrate_parsetree
-open Ast_405
+open Ast_406
 
 open Structures
 open Util
